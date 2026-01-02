@@ -62,10 +62,8 @@ int createDatabase(const char *User)
                                                                  "THEME          TEXT    NOT NULL,"
                                                                  "PIECES         INT,"
                                                                  "YEAR           INT,"
-                                                                 "ASSEMBLED      BOOLEAN,"
-                                                                 "ORGANIZED      BOOLEAN)";
+                                                                 "STATUS         INT)";
 
-    /* Execute SQL statement */
     rc = sqlite3_exec(db, sql_stmt.c_str(), callback, 0, &zErrMsg);
     if (rc != SQLITE_OK)
     {
@@ -104,7 +102,7 @@ int update(std::string user, int ID, std::string field, T value)
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2) // FIXED: Check if the required argument argv[1] exists
+    if (argc < 2)
     {
         std::cout << "ERROR: Missing command operation. Usage: ./main [OPERATION] [ARGUMENTS]" << "\n";
         return 1;
@@ -125,5 +123,5 @@ int main(int argc, char *argv[])
     {
         std::cout << "YOU FUCKED UP!" << "\n";
     }
-    return 0; // Added explicit return 0
+    return 0;
 };
