@@ -62,7 +62,7 @@ int createDatabase(const char *User)
                                                                  "THEME          TEXT    NOT NULL,"
                                                                  "PIECES         INT,"
                                                                  "YEAR           INT,"
-                                                                 "STATUS         INT)";
+                                                                 "STATUS         TEXT)";
 
     rc = sqlite3_exec(db, sql_stmt.c_str(), callback, 0, &zErrMsg);
     if (rc != SQLITE_OK)
@@ -77,11 +77,6 @@ int createDatabase(const char *User)
 
     sqlite3_close(db);
     return 0;
-}
-
-int create(std::string user)
-{
-    return createDatabase(user.c_str());
 }
 
 int insert(std::string user, int ID, std::string name, std::string theme, int pieces, int year, bool assembled, bool organized)
@@ -104,7 +99,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2)
     {
-        std::cout << "ERROR: Missing command operation. Usage: ./main [OPERATION] [ARGUMENTS]" << "\n";
+        std::cout << "Missing command operation. Usage: ./main [OPERATION] [ARGUMENTS]" << "\n";
         return 1;
     }
 
@@ -113,9 +108,12 @@ int main(int argc, char *argv[])
     {
         std::cout << operation << "\n";
         switch (operation) {
-            case 1:
+            case 1: //CREATE
                 createDatabase(argv[2]);
                 break;
+            case 2:
+                break;
+            
         }
         
     }
